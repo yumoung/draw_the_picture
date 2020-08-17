@@ -13,8 +13,8 @@ boolean finish = true;
 
 void setup() {
   size(900, 900);
-  frameRate(120);
-  img = loadImage("google.png");
+  frameRate(2400);
+  img = loadImage("image\\google.png");
   for (int i=0; i<10000; i++) {
     picture[i] = new Line();
   }
@@ -62,7 +62,7 @@ void draw() {
       int i = (int)v.x;
       int j= (int)v.y;
       chk = false;
-    forexit:
+    for1:
       for (int k=-3; k<=3; k++) {
         for (int l=-3; l<=3; l++) { 
           int ip = i+k;
@@ -74,7 +74,7 @@ void draw() {
               picture[in].push(temp);
               check[i][j] = false;
               check[ip][jp] = false;
-              break forexit;
+              break for1;
             }
           }
         }
@@ -84,7 +84,7 @@ void draw() {
     in++;
 
     finish = false;
-  forout2:
+  for2:
     for (int i=0; i<img.height; i++) {
       for (int j=0; j<img.width; j++) {
         if (check[i][j]) {
@@ -94,17 +94,22 @@ void draw() {
           picture[in].push(temp);
           println("sans");
           finish = true;
-          break forout2;
+          break for2;
         }
       }
     }
     println("index: " + in);
-  }
-  else{
+  } 
+  else {
     f2++;
-    if(f2 >= picture[f1].lines.size()-1) {
+    if (f2 >= picture[f1].lines.size()-1) {
       f1++;
       f2 = 0;
+      //println("End!");
+    }
+    if(f1>=in){
+      println("End");
+      delay(100000);
     }
     PVector v1 = picture[f1].lines.get(f2);
     PVector v2 = picture[f1].lines.get(f2+1);
